@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://ci10qxsa04b3d"]
+
+[ext_resource type="Script" uid="uid://c01ab3yoa7tdu" path="res://scripts/start_xr.gd" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://bwv7r65fjr8ml" path="res://scripts/solar_system.gd" id="2_sugp2"]
+
+[sub_resource type="Environment" id="Environment_fywmd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_0p1vo"]
+radius = 0.03
+height = 0.06
+
+[sub_resource type="SphereMesh" id="SphereMesh_j3qev"]
+radius = 0.03
+height = 0.06
+
+[node name="Main" type="Node3D" unique_id=162087903]
+script = ExtResource("1_0wfyh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1335428139]
+environment = SubResource("Environment_fywmd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1040268003]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+light_energy = 0.4
+
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=515120825]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1265635532]
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D" unique_id=985747947]
+tracker = &"left_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftHand" unique_id=528378340]
+mesh = SubResource("SphereMesh_0p1vo")
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D" unique_id=725624089]
+tracker = &"right_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightHand" unique_id=2024799782]
+mesh = SubResource("SphereMesh_j3qev")
+
+[node name="SolarSystem" type="Node3D" parent="." unique_id=1293186321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -0.8)
+script = ExtResource("2_sugp2")
